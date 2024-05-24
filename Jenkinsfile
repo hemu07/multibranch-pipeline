@@ -67,6 +67,7 @@ pipeline {
             }
         }
     }
+}
     post {
         always {       // runs always whether the pipeline fails or succeeds
             echo "executed the pipeline with imageversion .. "
