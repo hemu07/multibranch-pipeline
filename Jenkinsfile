@@ -50,6 +50,10 @@ pipeline {
                     choice(name: 'env', choices: ['dev', 'uat', 'mo'], description: '')
                 }
             }
+             when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
             steps {
                 echo "deploying the app... with version ${params.VERSION}"
 
