@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        BRANCH_NAME = 'jenkins-job'
+      //  BRANCH_NAME = 'jenkins-job'
         NEW_VERSION = '1.3.0'  // use this syntax when we need env var. in more than one stage
        // SERVER_CREDENTIALS = credentials('dummy-server')
     }
@@ -54,6 +54,7 @@ pipeline {
                 expression {
                     BRANCH_NAME == 'master'
                 }
+             }
             steps {
                 echo "deploying the app... with version ${params.VERSION}"
 
@@ -65,7 +66,6 @@ pipeline {
                   sh "echo deployed the app.."
                 
             }
-        }
     }
 }
     post {
