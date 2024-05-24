@@ -22,6 +22,7 @@ def buildImage() {
 
 def deployApp() {
     echo "Deploying the application..."
+    echo " some changes to trigger webhook"
 }
 
 return this
