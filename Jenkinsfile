@@ -1,5 +1,5 @@
-
 def gv
+
 pipeline {
     agent any
     tools {
@@ -14,7 +14,20 @@ pipeline {
                 }
             }
         }
+          stage('test app') {
+            steps {
+                script {
+                    gv.testApp()
+                    }
+                }
+            }
+        
         stage('build jar') {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     gv.buildJarFile()
@@ -22,6 +35,11 @@ pipeline {
             }
         }
         stage('build docker image') {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                     gv.buildImage()
@@ -30,6 +48,11 @@ pipeline {
             }
         
         stage('deploying the app') {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 script {
                    gv.deployApp()
