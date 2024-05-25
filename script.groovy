@@ -13,7 +13,7 @@ def buildImage() {
                     withCredentials([ 
                         usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'USER', passwordVariable: 'PAT')
                     ]) { 
-                        sh "sudo docker build -t hemu07/hemali_repo:jma-2.0 . "
+                        sh " docker build -t hemu07/hemali_repo:jma-2.0 . "
                         sh "echo ${PAT} | docker login -u ${USER} --password-stdin"
                         sh "docker push hemu07/hemali_repo:jma-2.0"
     }
