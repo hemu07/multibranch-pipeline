@@ -44,7 +44,7 @@ pipeline {
         }
          stage('commit updated version back to git repo') {
               environment {
-            GIT_REPO_NAME = "demo-java-maven-app"
+            GIT_REPO_NAME = "multibranch-pipeline"
             GIT_USER_NAME = "hemu07"
         }
             steps {
