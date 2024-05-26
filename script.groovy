@@ -37,7 +37,7 @@ def commitVersionUpdate() {
                     sh "git remote set-url origin  https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}"
                     sh 'git add .'
                     sh 'git commit -m "ci:version bump"'
-                    sh 'git push origin HEAD:jenkins-job'
+                    sh 'git push origin HEAD:uat'
                     }
     }
 return this
