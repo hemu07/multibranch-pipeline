@@ -1,5 +1,4 @@
 def gv
-
 pipeline {
     agent any
     tools {
@@ -14,20 +13,14 @@ pipeline {
                 }
             }
         }
-          stage('test app') {
+        stage('increment version') {
             steps {
                 script {
-                    gv.testApp()
-                    }
+                    gv.incrementVersion()
                 }
             }
-        
+        }
         stage('build jar') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
                     gv.buildJarFile()
@@ -35,11 +28,6 @@ pipeline {
             }
         }
         stage('build docker image') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
                     gv.buildImage()
@@ -48,16 +36,23 @@ pipeline {
             }
         
         stage('deploying the app') {
-            when {
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
             steps {
                 script {
                    gv.deployApp()
                 }
             }
-        }   
+        }
+         stage('commit updated version back to git repo') {
+              environment {
+            GIT_REPO_NAME = "demo-java-maven-app"
+            GIT_USER_NAME = "hemu07"
+        }
+            steps {
+                script {
+                gv.commitVersionUpdate()
+                }
+            }
+        }
+
     }
 }
